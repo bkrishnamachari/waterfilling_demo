@@ -3,12 +3,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def waterfilling_solution(ni_gi, P_total):
-    '''this function returns the optimal 1/lambda*'''
+    ''' solve for waterlevel '''
     ni_gi = np.array(ni_gi)
-    granularity = 10000
-    #this loop keeps increasing 1/lambda till powers add up to P_total
-    for i in range(granularity):
-      inv_lambda_star = i/granularity
+
+    #keep increasing level till powers add up to Ptotal
+    for i in range(100):
+      inv_lambda_star = i*0.1
       Parray = inv_lambda_star*np.ones(len(ni_gi))-ni_gi 
       Parray[Parray<0] = 0
       Ps = np.sum(Parray)
@@ -18,16 +18,15 @@ def waterfilling_solution(ni_gi, P_total):
     return inv_lambda_star
 
 def plot_waterfilling(ni_gi, P_total):
-    '''this function plots the waterfilling solution'''
+    ''' plot the solution'''
     inv_lambda_star = waterfilling_solution(ni_gi, P_total)
     fig, ax = plt.subplots()
     x = np.arange(len(ni_gi))
     bars = ax.bar(x, ni_gi, color='red')
 
-    #the following calculates the optimal power levels
-    powers = inv_lambda_star*np.ones(len(ni_gi))-ni_gi 
+    #calculate optimal power levels
+    powers = inv_lambda_star*np.ones(len(ni_gi))-ni_gi
     powers[powers<0] = 0
-
     bars2 = ax.bar(x, powers, color='green', bottom=ni_gi)
     line = ax.axhline(inv_lambda_star, color='red', linestyle='--')
     for i, bar in enumerate(bars):
@@ -41,7 +40,7 @@ def plot_waterfilling(ni_gi, P_total):
 
 st.title("Illustration of Waterfilling with 4 channels")
 
-st.write("Please enter ni/gi for each of the 4 channels, as values between 0.01 to 10")
+st.write("Please enter ni/gi for each of the 4 channels")
 num1 = st.number_input("Please enter n1/g1: ")
 num2 = st.number_input("Please enter n2/g2: ")
 num3 = st.number_input("Please enter n3/g3: ")
