@@ -41,7 +41,7 @@ def plot_waterfilling(ni_gi, P_total):
 
 st.title("Illustration of Waterfilling with 4 channels")
 
-st.write("Please enter ni/gi for each of the 4 channels")
+st.write("Please enter ni/gi for each of the 4 channels, as values between 0.01 to 10")
 num1 = st.number_input("Please enter n1/g1: ")
 num2 = st.number_input("Please enter n2/g2: ")
 num3 = st.number_input("Please enter n3/g3: ")
