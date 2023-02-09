@@ -33,8 +33,23 @@ def plot_waterfilling(ni_gi, P_total):
     ax.set_ylabel(r'$\frac{n_i}{g_i}$')
     st.pyplot(fig)
 
-ni_gi = [1, 2, 3, 4]
+st.title("Illustration of Waterfilling with 4 channels")
+
+st.write("Please enter ni/gi for each of the 4 channels")
+num1 = st.number_input("Please enter n1/g1: ")
+num2 = st.number_input("Please enter n2/g2: ")
+num3 = st.number_input("Please enter n3/g3: ")
+num4 = st.number_input("Please enter n4/g4: ")
+ni_gi = [num1, num2, num3, num4]
+st.write(str(ni_gi))
+
 P_total = st.slider("Choose the P_total value", 0.1, 10.0, 1.0, 0.1)
 
+st.write("See solution below")
 plot_waterfilling(ni_gi, P_total)
-
+inv_lambda_star = waterfilling_solution(ni_gi,P_total)
+st.write("The value of 1/lambda* in this case is: "+str(inv_lambda_star))
+st.write("The power level allocated to each channel is ")
+powers = inv_lambda_star*np.ones(len(ni_gi))-ni_gi
+powers[powers<0] = 0
+st.write(str(powers))
