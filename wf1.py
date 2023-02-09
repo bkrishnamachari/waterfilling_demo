@@ -31,7 +31,7 @@ def plot_waterfilling(ni_gi, P_total):
     ax.set_xticks(x)
     ax.set_xlabel('Channel')
     ax.set_ylabel(r'$\frac{n_i}{g_i}$')
-    st.pyplot()
+    st.pyplot(fig)
 
 ni_gi = [1, 2, 3, 4]
 P_total = st.slider("Choose the P_total value", 0.1, 10.0, 1.0, 0.1)
