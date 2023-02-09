@@ -22,17 +22,17 @@ def plot_waterfilling(ni_gi, P_total):
     inv_lambda_star = waterfilling_solution(ni_gi, P_total)
     fig, ax = plt.subplots()
     x = np.arange(len(ni_gi))
-    bars = ax.bar(x, ni_gi, color='blue')
+    bars = ax.bar(x, ni_gi, color='red')
 
     #the following calculates the optimal power levels
     powers = inv_lambda_star*np.ones(len(ni_gi))-ni_gi 
     powers[powers<0] = 0
 
-    bars2 = ax.bar(x, powers, color='yellow', bottom=ni_gi)
+    bars2 = ax.bar(x, powers, color='green', bottom=ni_gi)
     line = ax.axhline(inv_lambda_star, color='red', linestyle='--')
     for i, bar in enumerate(bars):
         if ni_gi[i] < inv_lambda_star:
-            bar.set_color('gray')
+            bar.set_color('blue')
             ax.fill_betweenx([0, ni_gi[i]], i-0.35, i+0.35, color='blue', alpha=0.5)
     ax.set_xticks(x)
     ax.set_xlabel('Channel')
